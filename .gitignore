@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Bryon's ignore template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+lib/node_modules
+app/values
+lib/.sass-cache/
+css/
