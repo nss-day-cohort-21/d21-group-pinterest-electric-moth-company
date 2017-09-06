@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("showAllBoardsCtrl", function ($scope, pinsFactory, boardsFactory, userFactory, $rootScope) {
+app.controller("showAllBoardsCtrl", function ($scope, pinsFactory, boardsFactory, userFactory, filterFactory, $rootScope) {
     $scope.boards = [];
     let user = userFactory.getCurrentUser();
     $rootScope.searchText = true;
