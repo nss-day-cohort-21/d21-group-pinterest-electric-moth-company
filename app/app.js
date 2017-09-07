@@ -17,23 +17,23 @@ const isAuth = (userFactory) => userFactory.isAuthenticated();
 // the .when specifies the the template, controller, and the resolve (see above)
 // to be instantiated when the path is requested
 
-app.config([
-    "$routeProvider",
-    "$httpProvider",
-    function($routeProvider, $httpProvider){
-        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
-    }
-]);
+// app.config([
+//     "$routeProvider",
+//     "$httpProvider",
+//     function($routeProvider, $httpProvider){
+//         $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+//     }
+// ]);
 
-// app.config(($routeProvider, $httpProvider)=> {
-//     $routeProvider
-//         .when('/', {
-//             templateUrl: 'partials/show-all-boards.html',
-//             controller: 'listCtrl',
-//             resolve: {isAuth}
-//         })
-//         .otherwise('/');
-// });
+app.config(($routeProvider, $httpProvider)=> {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'partials/show-all-boards.html',
+            controller: 'listCtrl',
+            resolve: {isAuth}
+        })
+        .otherwise('/');
+});
 
 // .run blocks - A run block is the code which needs to run to kickstart the application. 
 // It is executed after all of the service have been configured and the injector has been created
