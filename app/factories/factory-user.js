@@ -38,8 +38,9 @@ app.factory("userFactory", function ($q, $http, PINCreds, $window) {
 
     const getUserInfo = function() {
         console.log("Token:", token);
-        $http.get(`https://api.pinterest.com/v1/me/?access_token=${token}&fields=first_name%2Cid%2Clast_name%2Curl%2Cimage`)
+        $http.get(`https://api.pinterest.com/v1/me/?access_token=${token}&fields=username%2Clast_name%2Cfirst_name%2Cimage`)
         .then((info) => {
+            $scope.username = info.data.data.username;
             console.log("Personal Info:", info.data);
             console.log("Hello ", info.data.data.first_name + " " + info.data.data.last_name + "!");
             $('#targetDiv').append(`<img class="circle" src="${info.data.data.image["60x60"].url}" />`);
@@ -48,6 +49,6 @@ app.factory("userFactory", function ($q, $http, PINCreds, $window) {
 
     };
 
-    return { authCode, getAuthCode, getAccessToken, getMyToken };
+    return { authCode, getAuthCode, getAccessToken, getMyToken, getUserInfo };
 });
 

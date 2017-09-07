@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<div ng-controller="addPinCtrl">
+	<h3>Create a Pin</h3>
+	<form>
+	    <div class="form-group">
+	        <label>What board?</label>
+	        <input type="text" class="form-control" placeholder="Hint: username/boardname" ng-model="pin.board"/>
+	    </div>
+	    <div class="form-group">
+	        <label>Note</label>
+	        <input type="text" class="form-control" placeholder="Make a note" ng-model="pin.note"/>
+	    </div>
+	    <div class="form-group">
+	        <label>Link</label>
+	        <input type="text" class="form-control" placeholder="Link" ng-model="pin.link"/>
+	    </div>
+	    <div class="form-group">
+	        <label>Image URL</label>
+	        <input type="text" class="form-control" placeholder="Image location" ng-model="pin.image_url"/>
+	    </div>
+	    <div class="text-center">
+	        <button class="btn btn-default red" ng-click="createPin()">Create Pin</button>    
+	    </div>
+	</form>
+</div>
