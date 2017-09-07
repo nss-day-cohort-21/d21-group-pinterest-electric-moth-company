@@ -3,6 +3,11 @@
 
 app.controller("addBoardCtrl", function($scope, $window, userFactory, PINCreds, $q, $http){
 
+	 $scope.board = {
+        name: "",
+        description: ""
+    };
+
 	const authCode = userFactory.getAuthCode();
     const authToken = userFactory.getAccessToken();
     var newAuthToken;
@@ -13,10 +18,8 @@ app.controller("addBoardCtrl", function($scope, $window, userFactory, PINCreds, 
     $scope.createBoard = function() {
     	const myToken = userFactory.getMyToken();
     	console.log("My pretty token:", myToken);
-    	let obj = {
-	                   name: 'NSS Codez',
-	               };
-	    $http.post(`https://api.pinterest.com/v1/boards/?access_token=${myToken}&fields=id%2Cname%2Curl`, obj)
+    	
+	    $http.post(`https://api.pinterest.com/v1/boards/?access_token=${myToken}&fields=id%2Cname`, $scope.board)
 	    .then((data) => {
 	        console.log("Post Data:", data);
 	    })

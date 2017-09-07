@@ -8,33 +8,34 @@
 	</head>
 	<body ng-app="unpinterested">
 
-		<div ng-controller="userCtrl">
-			 <nav>
-			    <div class="nav-wrapper red">
-			    	<div class="container">
-				      <a href="#" class="brand-logo">Unpinterested</a>
-				      <ul id="nav-mobile" class="right hide-on-med-and-down">
-				        <li><a href="https://api.pinterest.com/oauth/?response_type=code&redirect_uri=https://21588d50.ngrok.io&scope=read_public,write_public,read_relationships,write_relationships&client_id=4921312230101758289" id="login">Login</a></li>
-				        <li><a href="#" id="authCode" ng-click="getAuthCode()">Get Auth Code</a></li>
-				        <li><a href="#" id="token" ng-click="getAccessToken()">Get Access Token</a></li>
-				        <li><a href="#" id="logout" class="hide">Logout</a></li>
-						<li><div id="targetDiv"></div></li>
-						<li><div id="userName"></div></li>
-				      </ul>
-				    </div>
-			    </div>
-			  </nav>
+		<div ng-controller="navbarCtrl">
+			 <div ng-include="'partials/navbar.html'"></div>
 		</div>
 		<div>
 		  	<div class="container">
-				<div class="row">
+				<div ng-include="'partials/action-buttons.html'"></div>
+
+				<div ng-view></div>
+
+				<!-- <div class="row">
+					<a data-pin-do="embedUser" data-pin-board-width="1500" data-pin-scale-height="1500" data-pin-scale-width="200" href="https://www.pinterest.com/mtallentbdesign/"></a>
+				</div>
+				<div ng-include="'partials/add-pin.html'"></div>
+
+				<div ng-include="'partials/add-board.html'"></div>
+ -->
+
+
+
+
+				<!-- <div class="row">
 					<div ng-controller="addPinCtrl">
 						<button type="button" id="addPin" class="waves-effect waves-light red btn" ng-click="createPin()">Add Pin</button>
 					</div>
 					<div ng-controller="addBoardCtrl">
 						<button type="button" id="addBoard" class="waves-effect waves-light red btn" ng-click="createBoard()">Add Board</button>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
         
@@ -50,6 +51,7 @@
 		<script type="text/javascript" src="./lib/node_modules/angular-route/angular-route.min.js"></script>
 		<script type="text/javascript" src="./lib/node_modules/firebase/firebase.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
 
 
 		<!-- App.js file and credentials -->

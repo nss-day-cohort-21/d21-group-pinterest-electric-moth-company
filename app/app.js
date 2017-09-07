@@ -17,22 +17,38 @@ const isAuth = (userFactory) => userFactory.isAuthenticated();
 // the .when specifies the the template, controller, and the resolve (see above)
 // to be instantiated when the path is requested
 
-// app.config([
-//     "$routeProvider",
-//     "$httpProvider",
-//     function($routeProvider, $httpProvider){
-//         $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
-//     }
-// ]);
 
 app.config(($routeProvider, $httpProvider)=> {
     $routeProvider
-        .when('/', {
-            templateUrl: 'partials/show-all-boards.html',
-            controller: 'listCtrl',
-            resolve: {isAuth}
-        })
-        .otherwise('/');
+    .when('/', {
+	    templateUrl: 'partials/show-all-boards.html',
+	    controller: 'userCtrl'
+    })
+    .when('/add-pin', {
+        templateUrl: 'partials/add-pin.html',
+        controller: 'addPinCtrl'
+    })
+    .when('/add-board', {
+        templateUrl: 'partials/add-board.html',
+        controller: 'addBoardCtrl'
+    })
+    .when('/edit-pin', {
+        templateUrl: 'partials/edit-pin.html',
+        controller: 'editPinCtrl'
+    })
+    .when('/delete-pin', {
+        templateUrl: 'partials/delete-pin.html',
+        controller: 'deletePinCtrl'
+    })
+    .when('/edit-board', {
+        templateUrl: 'partials/edit-board.html',
+        controller: 'editBoardCtrl'
+    })
+    .when('/delete-board', {
+        templateUrl: 'partials/delete-board.html',
+        controller: 'deleteBoardCtrl'
+    })
+    .otherwise('/');
 });
 
 // .run blocks - A run block is the code which needs to run to kickstart the application. 
