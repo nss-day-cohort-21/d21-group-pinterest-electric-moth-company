@@ -1,76 +1,53 @@
 "use strict";
 
 
-app.factory("userFactory", function ($q, $http) {
-    // default to null, checked and updated onAuthStateChanged
-    // and used throughout the application to check if there is a current user
-    // and if so, what their firebase uid is.
-    let currentUser = null;
+app.factory("userFactory", function ($q, $http, PINCreds, $window) {
 
+    var authCode;
+    var token;
 
-    // Create an instance of the Google provider object
-    const provider = new firebase.auth.GoogleAuthProvider();
+    
+    const getAuthCode = function() {
+        let currentURL = $window.location.href;
+        authCode = currentURL.slice(32, 48);
+        console.log('Temporary Auth Code:', authCode);
+        return authCode;
+    };
 
-    // if a user is authenticated, resolve true, else reject false
-    // this is returns a promise whose status is checked in the resolve
-    // to many of the paths configure with $routeprovider in app.js
-    // they will be injected when the controller is instantiated,
-    // and are available to $scope in that controller under $resolve.
-    // else a $routeChangeError will be fired
-    let isAuthenticated = function () {
-        return new Promise ((resolve) => {
-            firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                    currentUser = user.uid;
-                    console.log('current user', currentUser);
-                    resolve(true);
-                }else {
-                    resolve(false);
-                }
-            });
+    const getAccessToken = function() {
+        return $http.post(`https://api.pinterest.com/v1/oauth/token?grant_type=authorization_code&client_id=${PINCreds.client_id}&client_secret=${PINCreds.client_secret}&code=${authCode}`)
+        .then((authCode) => {
+            console.log('Permanent Access Token:', authCode.data.access_token);
+            token = authCode.data.access_token;
+            // $window.location = `https://api.pinterest.com/v1/me/boards/?access_token${data.data.access_token}=&fields=id%2Cname%2Curl`;
+            // resolve(token);
+            return token;
+        })
+        .catch((error) => {
+            console.log("Request Error:", error);
+        })
+        .then((token) => {
+            console.log("THE TOKEN:", token);
+            token = token;
         });
     };
 
-    const getCurrentUser = function(){
-        return currentUser;
+    const getMyToken = function() {
+        return token;
     };
 
-
-
-    const logIn = function(user){
-        return firebase.auth()
-            .signInWithEmailAndPassword(user.email, user.password);
-    };
-
-
-    const logOut = function(){
-        return firebase.auth().signOut();
-    };
-
-
-    // this takes an object created in the controller
-    // which has an email and password from the form data
-    // gathered in user.html
-    const register = function(user){
-        return firebase.auth()
-            .createUserWithEmailAndPassword(user.email, user.password);
-    };
-
-    const authWithProvider = function(){
-        return firebase.auth().signInWithPopup(provider);
-    };
-
-    return {
-
-        getCurrentUser,
-        logIn,
-        logOut,
-        register,
-        isAuthenticated,
-        authWithProvider
+    const getUserInfo = function() {
+        console.log("Token:", token);
+        $http.get(`https://api.pinterest.com/v1/me/?access_token=${token}&fields=first_name%2Cid%2Clast_name%2Curl%2Cimage`)
+        .then((info) => {
+            console.log("Personal Info:", info.data);
+            console.log("Hello ", info.data.data.first_name + " " + info.data.data.last_name + "!");
+            $('#targetDiv').append(`<img class="circle" src="${info.data.data.image["60x60"].url}" />`);
+            $('#userName').append(`<span class="center">Hello ${info.data.data.first_name}<span>`);
+        });
 
     };
 
-
+    return { authCode, getAuthCode, getAccessToken, getMyToken };
 });
 
