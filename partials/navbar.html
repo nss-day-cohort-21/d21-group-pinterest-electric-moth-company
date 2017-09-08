@@ -3,13 +3,26 @@
 		<div class="container">
 	      <a href="#" class="brand-logo">Unpinterested</a>
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a href="https://api.pinterest.com/oauth/?response_type=code&redirect_uri=https://21588d50.ngrok.io&scope=read_public,write_public,read_relationships,write_relationships&client_id=4921312230101758289" id="login">Login</a></li>
+	        <li><a ng-show="!isLoggedIn" href="https://api.pinterest.com/oauth/?response_type=code&redirect_uri=https://21588d50.ngrok.io&scope=read_public,write_public,read_relationships,write_relationships&client_id=4921312230101758289" id="login">Login</a></li>
 	        <!-- <li><a href="#" id="authCode" ng-click="getAuthCode()">Get Auth Code</a></li>
 	        <li><a href="#" id="token" ng-click="getAccessToken()">Get Access Token</a></li> -->
-	        <li><a href="#" id="logout" class="hide">Logout</a></li>
-			<li><div id="targetDiv"></div></li>
-			<li><div id="userName"></div></li>
+	      
+			<li><div ng-show="isLoggedIn" id="targetDiv"></div></li>
+			<li><div ng-show="isLoggedIn" id="userName"></div></li>
+			<li><a ng-show="isLoggedIn" ng-click="logOutLink()" id="logout">Logout</a></li>
 	      </ul>
 	    </div>
 	</div>
 </nav>
+
+<div class="row">
+	<ul ng-show="isLoggedIn" class="pinButtons">
+		<li><a class="waves-effect waves-light btn blue darken-1 small" ng-href="#!/">Show All</a></li>
+		<li><a class="waves-effect waves-light btn blue darken-1 small" ng-href="#!/add-pin">Add Pin</a></li>
+		<li><a class="waves-effect waves-light btn blue darken-1 small" ng-href="#!/edit-pin">Edit Pin</a></li>
+		<li><a class="waves-effect waves-light btn blue darken-1 small" ng-href="#!/delete-pin">Delete Pin</a></li>
+		<li><a class="waves-effect waves-light btn blue darken-1 small" ng-href="#!/add-board">Add Board</a></li>
+		<li><a class="waves-effect waves-light btn blue darken-1 small" ng-href="#!/edit-board">Edit Board</a></li>
+		<li><a class="waves-effect waves-light btn blue darken-1 small" ng-href="#!/delete-board">Delete Board</a></li>
+	</ul>
+</div>

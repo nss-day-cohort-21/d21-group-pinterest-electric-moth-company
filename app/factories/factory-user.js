@@ -6,12 +6,17 @@ app.factory("userFactory", function ($q, $http, PINCreds, $window) {
     var authCode;
     var token;
 
-    
+    const checkURL = function() {
+        let currentURL = $window.location.href;
+        let isCodePresent = currentURL.indexOf("code");
+        return isCodePresent;
+    };
+
     const getAuthCode = function() {
         let currentURL = $window.location.href;
         authCode = currentURL.slice(32, 48);
         console.log('Temporary Auth Code:', authCode);
-        return authCode;
+        // return authCode;
     };
 
     const getAccessToken = function() {
@@ -36,19 +41,25 @@ app.factory("userFactory", function ($q, $http, PINCreds, $window) {
         return token;
     };
 
-    const getUserInfo = function() {
-        console.log("Token:", token);
-        $http.get(`https://api.pinterest.com/v1/me/?access_token=${token}&fields=username%2Clast_name%2Cfirst_name%2Cimage`)
-        .then((info) => {
-            $scope.username = info.data.data.username;
-            console.log("Personal Info:", info.data);
-            console.log("Hello ", info.data.data.first_name + " " + info.data.data.last_name + "!");
-            $('#targetDiv').append(`<img class="circle" src="${info.data.data.image["60x60"].url}" />`);
-            $('#userName').append(`<span class="center">Hello ${info.data.data.first_name}<span>`);
-        });
-
+    const logOut = function () {
+        console.log("logout clicked");
+        authCode = "";
+        token = "";
     };
 
-    return { authCode, getAuthCode, getAccessToken, getMyToken, getUserInfo };
+    // const getUserInfo = function() {
+    //     console.log("Token:", token);
+    //     $http.get(`https://api.pinterest.com/v1/me/?access_token=${token}&fields=username%2Clast_name%2Cfirst_name%2Cimage`)
+    //     .then((info) => {
+    //         $scope.username = info.data.data.username;
+    //         console.log("Personal Info:", info.data);
+    //         console.log("Hello ", info.data.data.first_name + " " + info.data.data.last_name + "!");
+    //         $('#targetDiv').append(`<img class="circle" src="${info.data.data.image["60x60"].url}" />`);
+    //         $('#userName').append(`<span class="center">Hello ${info.data.data.first_name}<span>`);
+    //     });
+
+    // };
+
+    return { checkURL, authCode, getAuthCode, getAccessToken, getMyToken, logOut };
 });
 

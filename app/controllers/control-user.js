@@ -9,12 +9,12 @@
 
 app.controller("userCtrl", function($scope, $window, userFactory, $location, PINCreds, $q, $http){
 
-    const authCode = userFactory.getAuthCode();
-    const authToken = userFactory.getAccessToken();
-    var newAuthToken;
+    // const authCode = userFactory.getAuthCode();
+    // const authToken = userFactory.getAccessToken();
+    // var newAuthToken;
 
-    console.log("Auth Code:", authCode);
-    console.log("Auth Token:", authToken);
+    // console.log("Auth Code:", authCode);
+    // console.log("Auth Token:", authToken);
 
     $scope.getUserInfo = function() {
         const myToken = userFactory.getMyToken();
