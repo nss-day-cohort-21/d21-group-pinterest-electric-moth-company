@@ -23,7 +23,7 @@ app.config(($routeProvider, $httpProvider)=> {
     $routeProvider
     .when('/', {
 	    templateUrl: 'partials/show-all-boards.html',
-	    controller: 'userCtrl'
+	    // controller: 'userCtrl'
     })
     .when('/add-pin', {
         templateUrl: 'partials/add-pin.html',
@@ -48,6 +48,10 @@ app.config(($routeProvider, $httpProvider)=> {
     .when('/delete-board', {
         templateUrl: 'partials/delete-board.html',
         controller: 'deleteBoardCtrl'
+    })
+    .when('/show-all-boards', {
+        templateUrl: 'partials/show-all-boards.html',
+        // controller: 'userCtrl'
     })
     .otherwise('/');
 });

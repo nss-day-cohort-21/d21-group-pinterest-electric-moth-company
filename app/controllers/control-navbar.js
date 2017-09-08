@@ -63,6 +63,7 @@ app.controller("navbarCtrl", function($scope, $window, userFactory, $location, P
         userFactory.logOut();
         isCodePresent = "";
         isTokenPresent = "";
+        $window.location.href = `https://9d9b09a8.ngrok.io`;
     };
 
     // $scope.loginUser = function() {
