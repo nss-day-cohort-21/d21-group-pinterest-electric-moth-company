@@ -11,7 +11,8 @@ const app = angular.module("unpinterested", ["ngRoute"]);
 // they will be injected when the controller is instantiated, and are available to $scope in that controller under $resolve.
 // else a $routeChangeError will be fired
 // in this case, we need to know if the user is logged in to determine whether to allow access to certain paths
-const isAuth = (userFactory) => userFactory.isAuthenticated();
+
+// const isAuth = (userFactory) => userFactory.isAuthenticated();
 
 // using $routeProvider to configure the routes
 // the .when specifies the the template, controller, and the resolve (see above)

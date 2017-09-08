@@ -8,12 +8,12 @@ app.controller("addBoardCtrl", function($scope, $window, userFactory, PINCreds, 
         description: ""
     };
 
-	const authCode = userFactory.getAuthCode();
-    const authToken = userFactory.getAccessToken();
-    var newAuthToken;
+	// const authCode = userFactory.getAuthCode();
+ //    const authToken = userFactory.getAccessToken();
+ //    var newAuthToken;
 
-    console.log("Auth Code:", authCode);
-    console.log("Auth Token:", authToken);
+    // console.log("Auth Code:", authCode);
+    // console.log("Auth Token:", authToken);
 
     $scope.createBoard = function() {
     	const myToken = userFactory.getMyToken();
